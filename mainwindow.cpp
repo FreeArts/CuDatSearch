@@ -57,3 +57,30 @@ void MainWindow::showDataList()
     //ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Hello"));
 
 }
+
+void MainWindow::characterAlignment(QString &l_targetString)
+{
+    l_targetString.remove("\"");
+
+    l_targetString.replace(" =","=");
+    l_targetString.replace("= ","=");
+
+
+    l_targetString.replace(" ,",",");
+    l_targetString.replace(", ",",");
+}
+
+void MainWindow::on_runQueryButton_clicked()
+{
+    //SELECT name,brand where date="2010" & sex="men" | brand="ktm"
+    QString l_tmpSelectRule = ui->querytEdit->toPlainText();
+    QStringList asd;
+
+    qDebug() << l_tmpSelectRule;
+    characterAlignment(l_tmpSelectRule);
+    qDebug() << l_tmpSelectRule;
+
+    asd = l_tmpSelectRule.split("where",QString::SkipEmptyParts);
+    qDebug() << asd.at(1);
+
+}

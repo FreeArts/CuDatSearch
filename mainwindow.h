@@ -25,14 +25,18 @@ private slots:
 
     void on_loadDatabaseButton_clicked();
 
+    void on_runQueryButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     QString m_databaseFileName_str;
     QString m_delimeter_str;
+    QVector<QString> m_selectRule_v;
 
     QVector<QVector<QString>> m_dataList_v;
 
     void showDataList();
+    void characterAlignment(QString &l_targetString);
 
 };
 
