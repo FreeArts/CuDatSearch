@@ -32,6 +32,8 @@ private:
 
     QVector<QVector<QString>> m_dataList_v;
 
+    void showDataList();
+
 };
 
 #endif // MAINWINDOW_H

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>653</width>
-    <height>492</height>
+    <width>676</width>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -48,16 +48,6 @@
     </property>
     <property name="text">
      <string>Query:</string>
-    </property>
-   </widget>
-   <widget class="QTableView" name="tableView">
-    <property name="geometry">
-     <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>541</width>
-      <height>211</height>
-     </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="searchButton">
@@ -134,13 +124,23 @@
      <string>Delimeter:</string>
     </property>
    </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>230</y>
+      <width>571</width>
+      <height>191</height>
+     </rect>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>653</width>
+     <width>676</width>
      <height>20</height>
     </rect>
    </property>

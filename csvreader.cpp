@@ -12,7 +12,7 @@ CSVReader::CSVReader(QString filename, QString delm) :
 { }
 
 CSVReader::~CSVReader() {
-    // TODO Auto-generated destructor stub
+
 }
 
 QVector<QVector<QString> > CSVReader::getData()
