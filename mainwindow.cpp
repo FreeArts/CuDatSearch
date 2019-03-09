@@ -72,15 +72,17 @@ void MainWindow::characterAlignment(QString &l_targetString)
 
 void MainWindow::on_runQueryButton_clicked()
 {
+    const unsigned int lc_afterWherePart=1;
+
     //SELECT name,brand where date="2010" & sex="men" | brand="ktm"
     QString l_tmpSelectRule = ui->querytEdit->toPlainText();
-    QStringList asd;
+    QStringList l_ruleWherePartDivide;
+    QStringList l_selectRuleParts;
 
-    qDebug() << l_tmpSelectRule;
     characterAlignment(l_tmpSelectRule);
-    qDebug() << l_tmpSelectRule;
 
-    asd = l_tmpSelectRule.split("where",QString::SkipEmptyParts);
-    qDebug() << asd.at(1);
+    l_ruleWherePartDivide = l_tmpSelectRule.split("where",QString::SkipEmptyParts);
+    l_selectRuleParts = l_ruleWherePartDivide.at(lc_afterWherePart).split(" ",QString::SkipEmptyParts);
 
+    m_selectRule_v = l_selectRuleParts.toVector();
 }
