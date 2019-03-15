@@ -31,7 +31,10 @@ private:
     Ui::MainWindow *ui;
     QString m_databaseFileName_str;
     QString m_delimeter_str;
+    QString m_queryCommand_str;
+
     QVector<QString> m_selectRule_v;
+    QVector<QString> m_selectTargets_v;
 
     QVector<QVector<QString>> m_dataList_v;
 

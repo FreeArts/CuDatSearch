@@ -72,17 +72,33 @@ void MainWindow::characterAlignment(QString &l_targetString)
 
 void MainWindow::on_runQueryButton_clicked()
 {
+    const unsigned int lc_beforeWherePart=0;
     const unsigned int lc_afterWherePart=1;
+    const unsigned int lc_TargetPart=1;
 
     //SELECT name,brand where date="2010" & sex="men" | brand="ktm"
-    QString l_tmpSelectRule = ui->querytEdit->toPlainText();
+    QString l_tmpSelectRule_str = ui->querytEdit->toPlainText();
+    QString l_queryCommand;
+
     QStringList l_ruleWherePartDivide;
     QStringList l_selectRuleParts;
+    QStringList l_selectTargetsParts;
+    QStringList l_selectTargets;
 
-    characterAlignment(l_tmpSelectRule);
+    characterAlignment(l_tmpSelectRule_str);
 
-    l_ruleWherePartDivide = l_tmpSelectRule.split("where",QString::SkipEmptyParts);
+    //Part0: SELECT name,brand where
+    //Part1:date="2010" & sex="men" | brand="ktm"
+    l_ruleWherePartDivide = l_tmpSelectRule_str.split("where",QString::SkipEmptyParts);
+
+    //(Part0:date="2010") (Part1:&) (Part2:sex="men") (Part3:|) (Part4:brand="ktm")
     l_selectRuleParts = l_ruleWherePartDivide.at(lc_afterWherePart).split(" ",QString::SkipEmptyParts);
 
+    //(Part0:SELECT) (Part1:name,brand)
+    l_selectTargetsParts = l_ruleWherePartDivide.at(lc_beforeWherePart).split(" ",QString::SkipEmptyParts);
+    //(Part0:name) (Part1:brand)
+    l_selectTargets = l_selectTargetsParts.at(lc_TargetPart).split(",",QString::SkipEmptyParts);
+
+    m_selectTargets_v = l_selectTargets.toVector();
     m_selectRule_v = l_selectRuleParts.toVector();
 }
