@@ -7,6 +7,7 @@
 #include <QMainWindow>
 #include <QFileDialog>
 #include <QDebug>
+#include "select.h"
 
 namespace Ui {
 class MainWindow;
@@ -33,13 +34,21 @@ private:
     QString m_delimeter_str;
     QString m_queryCommand_str;
 
+    SELECT m_SelectProcess;
+
     QVector<QString> m_selectRule_v;
     QVector<QString> m_selectTargets_v;
+    std::vector<std::string> m_selectRule_stdv;
+    std::vector<std::string> m_selectTargets_stdv;
 
-    QVector<QVector<QString>> m_dataList_v;
+    //QVector<QVector<QString>> m_dataList_v;
+    std::vector<std::vector<std::string>> m_dataList_v;
 
     void showDataList();
     void characterAlignment(QString &l_targetString);
+
+    void prepareQuery();
+    void vectorConvert(const QVector<QString> &l_selectRule_v,const QVector<QString> &l_selectTargets_v);
 
 };
 

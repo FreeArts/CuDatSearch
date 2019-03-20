@@ -1,7 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -33,16 +32,17 @@ void MainWindow::on_loadDatabaseButton_clicked()
 {
     m_delimeter_str = ui->delimeterBox->currentText();
     CSVReader *reader = new CSVReader(m_databaseFileName_str,m_delimeter_str);
-    m_dataList_v =  reader->getData();
+    m_dataList_v = reader->getData();
 
-    showDataList();
+    m_SelectProcess.loadDatabase(m_dataList_v);
+    //showDataList();
 
     delete reader;
 }
 
 void MainWindow::showDataList()
 {
-    for(QVector<QString> vec : m_dataList_v)
+    /*for(QVector<QString> vec : m_dataList_v)
         {
             for(QString vector_member : vec)
             {
@@ -50,7 +50,7 @@ void MainWindow::showDataList()
             }
             qDebug() << "\n";
         }
-
+*/
     //ui->tableWidget->setShowGrid(true);
     //ui->tableWidget->setRowCount(10);
     //ui->tableWidget->setColumnCount(5);
@@ -70,7 +70,7 @@ void MainWindow::characterAlignment(QString &l_targetString)
     l_targetString.replace(", ",",");
 }
 
-void MainWindow::on_runQueryButton_clicked()
+void MainWindow::prepareQuery()
 {
     const unsigned int lc_beforeWherePart=0;
     const unsigned int lc_afterWherePart=1;
@@ -101,4 +101,29 @@ void MainWindow::on_runQueryButton_clicked()
 
     m_selectTargets_v = l_selectTargets.toVector();
     m_selectRule_v = l_selectRuleParts.toVector();
+
+}
+
+void MainWindow::vectorConvert(const QVector<QString> &l_selectRule_v, const QVector<QString> &l_selectTargets_v)
+{
+    for(QString l_ruleMember_str : l_selectRule_v)
+    {
+        m_selectRule_stdv.push_back(l_ruleMember_str.toStdString());
+    }
+
+    for(QString l_targetMember_str : l_selectTargets_v)
+    {
+        m_selectRule_stdv.push_back(l_targetMember_str.toStdString());
+    }
+}
+
+void MainWindow::on_runQueryButton_clicked()
+{
+    prepareQuery();
+    vectorConvert(m_selectRule_v,m_selectTargets_v);
+
+    m_SelectProcess.readSelectRule(m_selectRule_stdv);
+    m_SelectProcess.run();
+    m_SelectProcess.showDatabase();
+
 }

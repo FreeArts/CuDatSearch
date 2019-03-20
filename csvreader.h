@@ -12,12 +12,16 @@
 #include <vector>
 #include <iterator>
 #include <string>
+#include <list>
 #include <algorithm>
 #include <boost/algorithm/string.hpp>
 #include <QString>
 #include <QVector>
 #include <QFile>
 #include <QTextStream>
+
+#include <algorithm>
+#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -32,7 +36,7 @@ public:
     QString m_delimeter_str;
 
     // Function to fetch data from a CSV File
-    QVector<QVector<QString> > getData();
+    std::vector<std::vector<string> > getData();
 };
 
 #endif /* CSVREADER_H_ */
