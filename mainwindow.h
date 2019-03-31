@@ -4,52 +4,52 @@
 #include <QVector>
 
 #include "csvreader.h"
-#include <QMainWindow>
-#include <QFileDialog>
-#include <QDebug>
 #include "select.h"
+#include <QDebug>
+#include <QFileDialog>
+#include <QMainWindow>
 
 namespace Ui {
+
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-    Q_OBJECT
+class MainWindow : public QMainWindow {
+  Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+  explicit MainWindow(QWidget *parent = 0);
+  ~MainWindow();
 
 private slots:
-    void on_searchButton_clicked();
+  void on_searchButton_clicked();
 
-    void on_loadDatabaseButton_clicked();
+  void on_loadDatabaseButton_clicked();
 
-    void on_runQueryButton_clicked();
+  void on_runQueryButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
-    QString m_databaseFileName_str;
-    QString m_delimeter_str;
-    QString m_queryCommand_str;
+  Ui::MainWindow *ui;
+  QString m_databaseFileName_str;
+  QString m_delimeter_str;
+  QString m_queryCommand_str;
 
-    SELECT m_SelectProcess;
+  SELECT m_SelectProcess;
 
-    QVector<QString> m_selectRule_v;
-    QVector<QString> m_selectTargets_v;
-    std::vector<std::string> m_selectRule_stdv;
-    std::vector<std::string> m_selectTargets_stdv;
+  QVector<QString> m_selectRule_v;
+  QVector<QString> m_selectTargets_v;
+  std::vector<std::string> m_selectRule_stdv;
+  std::vector<std::string> m_selectTargets_stdv;
 
-    //QVector<QVector<QString>> m_dataList_v;
-    std::vector<std::vector<std::string>> m_dataList_v;
+  // QVector<QVector<QString>> m_dataList_v;
+  std::vector<std::vector<std::string>> m_dataList_v;
 
-    void showDataList();
-    void characterAlignment(QString &l_targetString);
+  void showDataList();
+  void characterAlignment(QString &l_targetString);
 
-    void prepareQuery();
-    void vectorConvert(const QVector<QString> &l_selectRule_v,const QVector<QString> &l_selectTargets_v);
-
+  void prepareQuery();
+  void vectorConvert(const QVector<QString> &l_selectRule_v,
+                     const QVector<QString> &l_selectTargets_v);
 };
 
 #endif // MAINWINDOW_H
