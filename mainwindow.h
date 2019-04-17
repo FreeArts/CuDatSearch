@@ -45,11 +45,11 @@ private:
   std::vector<std::vector<std::string>> m_dataList_v;
 
   void showDataList();
-  void characterAlignment(QString &l_targetString);
+  void characterAlignment(QString &f_targetString);
 
   void prepareQuery();
-  void vectorConvert(const QVector<QString> &l_selectRule_v,
-                     const QVector<QString> &l_selectTargets_v);
+  void vectorConvert(const QVector<QString> &f_selectRule_v,
+                     const QVector<QString> &f_selectTargets_v);
 };
 
 #endif // MAINWINDOW_H

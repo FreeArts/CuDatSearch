@@ -48,14 +48,14 @@ void MainWindow::showDataList() {
   // ui->tableWidget->setItem(0, 1, new QTableWidgetItem("Hello"));
 }
 
-void MainWindow::characterAlignment(QString &l_targetString) {
-  l_targetString.remove("\"");
+void MainWindow::characterAlignment(QString &f_targetString) {
+  f_targetString.remove("\"");
 
-  l_targetString.replace(" =", "=");
-  l_targetString.replace("= ", "=");
+  f_targetString.replace(" =", "=");
+  f_targetString.replace("= ", "=");
 
-  l_targetString.replace(" ,", ",");
-  l_targetString.replace(", ", ",");
+  f_targetString.replace(" ,", ",");
+  f_targetString.replace(", ", ",");
 }
 
 void MainWindow::prepareQuery() {
@@ -95,13 +95,13 @@ void MainWindow::prepareQuery() {
   m_selectRule_v = l_selectRuleParts.toVector();
 }
 
-void MainWindow::vectorConvert(const QVector<QString> &l_selectRule_v,
-                               const QVector<QString> &l_selectTargets_v) {
-  for (QString l_ruleMember_str : l_selectRule_v) {
+void MainWindow::vectorConvert(const QVector<QString> &f_selectRule_v,
+                               const QVector<QString> &f_selectTargets_v) {
+  for (QString l_ruleMember_str : f_selectRule_v) {
     m_selectRule_stdv.push_back(l_ruleMember_str.toStdString());
   }
 
-  for (QString l_targetMember_str : l_selectTargets_v) {
+  for (QString l_targetMember_str : f_selectTargets_v) {
     m_selectTargets_stdv.push_back(l_targetMember_str.toStdString());
   }
 }
