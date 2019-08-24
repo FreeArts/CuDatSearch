@@ -65,7 +65,7 @@ void MainWindow::prepareQuery() {
 
   // SELECT name,brand where date="2010" & sex="men" | brand="ktm"
   QString l_tmpSelectRule_str = ui->querytEdit->toPlainText();
-  QString l_queryCommand;
+  //QString l_queryCommand; Dead code?
 
   QStringList l_ruleWherePartDivide;
   QStringList l_selectRuleParts;
