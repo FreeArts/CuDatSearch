@@ -1,4 +1,4 @@
 [submodule "CuDatBase"]
 	path = CuDatBase
 	url = https://github.com/FreeArts/CuDatBase
-	branch = master
+	branch = StringVersion
