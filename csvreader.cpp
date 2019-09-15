@@ -6,42 +6,22 @@
  */
 
 #include "csvreader.h"
-#include "select.h"
+
 CSVReader::CSVReader(QString filename, QString delm)
-    : m_fileName_str(filename), m_delimeter_str(delm) {}
+    : m_fileName_str(filename), m_delimeter_str(delm) {
+  m_dataBaseHeader_v.clear();
+  m_dataList_v.clear();
+}
 
 CSVReader::~CSVReader() {}
 
-// OLD
-/*std::vector<std::vector<std::string> > CSVReader::getData()
-{
-    //QVector<QVector<QString> > l_dataList_v;
-    std::vector<std::vector<std::string> > l_dataList_v;
-    l_dataList_v.clear();
+void CSVReader::readData() {
 
-    QFile file(m_fileName_str);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text)){
+  const unsigned int whereTheDataBaseHeader = 0;
+  const unsigned int whereTheDataStart = 1;
 
-        return l_dataList_v;
-    }
-
-
-    QTextStream in(&file);
-    while (!in.atEnd()) {
-        QString line = in.readLine();
-
-        QStringList l_words = line.split(m_delimeter_str);
-        std::list<std::string> asd ;
-         //l_dataList_v.push_back(l_words.toVector());
-    }
-
-    file.close();
-
-    return l_dataList_v;
-}*/
-
-std::vector<std::vector<std::string>> CSVReader::getData() {
   std::ifstream file(m_fileName_str.toStdString());
+  std::vector<long int> l_tmpVector_v;
   std::vector<std::vector<std::string>> l_dataList_v;
   l_dataList_v.clear();
 
@@ -53,8 +33,28 @@ std::vector<std::vector<std::string>> CSVReader::getData() {
                             boost::is_any_of(m_delimeter_str.toStdString()));
     l_dataList_v.push_back(vec);
   }
+
+  m_dataBaseHeader_v = l_dataList_v.at(whereTheDataBaseHeader);
+
+  for (unsigned int l_itx_i = whereTheDataStart; l_itx_i < l_dataList_v.size();
+       l_itx_i++) {
+    for (unsigned int l_ity_i = 0; l_ity_i < l_dataList_v.at(l_itx_i).size();
+         l_ity_i++) {
+      long int l_tmpVectorValue_li =
+          std::stol(l_dataList_v.at(l_itx_i).at(l_ity_i));
+      l_tmpVector_v.push_back(l_tmpVectorValue_li);
+    }
+    m_dataList_v.push_back(l_tmpVector_v);
+    l_tmpVector_v.clear();
+  }
   // Close the File
   file.close();
+}
 
-  return l_dataList_v;
+std::vector<string> CSVReader::getHeaderOfDatabse() const {
+  return m_dataBaseHeader_v;
+}
+
+std::vector<std::vector<long>> CSVReader::getDataBase() const {
+  return m_dataList_v;
 }

@@ -42,7 +42,8 @@ private:
   std::vector<std::string> m_selectTargets_stdv;
 
   // QVector<QVector<QString>> m_dataList_v;
-  std::vector<std::vector<std::string>> m_dataList_v;
+  std::vector<std::vector<long int>> m_dataList_v;
+  std::vector<std::string> m_headerOfDataBase_v;
 
   void showDataList();
   void characterAlignment(QString &f_targetString);

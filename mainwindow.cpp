@@ -24,9 +24,15 @@ void MainWindow::on_searchButton_clicked() {
 void MainWindow::on_loadDatabaseButton_clicked() {
   m_delimeter_str = ui->delimeterBox->currentText();
   CSVReader *reader = new CSVReader(m_databaseFileName_str, m_delimeter_str);
-  m_dataList_v = reader->getData();
 
-  m_SelectProcess.loadDatabase(m_dataList_v);
+  reader->readData();
+
+  m_dataList_v = reader->getDataBase();
+  m_headerOfDataBase_v = reader->getHeaderOfDatabse();
+
+  m_SelectProcess.loadDatabase(m_dataList_v, m_headerOfDataBase_v);
+
+  // For Qt part test. Original showDataList is on Cuda side!
   // showDataList();
 
   delete reader;
@@ -64,8 +70,9 @@ void MainWindow::prepareQuery() {
   const unsigned int lc_TargetPart = 1;
 
   // SELECT name,brand where date="2010" & sex="men" | brand="ktm"
+  // SELECT name,brand where date="2010" & sex="1" | brand="3"
   QString l_tmpSelectRule_str = ui->querytEdit->toPlainText();
-  //QString l_queryCommand; Dead code?
+  // QString l_queryCommand; Dead code?
 
   QStringList l_ruleWherePartDivide;
   QStringList l_selectRuleParts;
@@ -114,5 +121,5 @@ void MainWindow::on_runQueryButton_clicked() {
   m_SelectProcess.run();
   m_SelectProcess.showDatabase();
 
-  m_selectRule_stdv.clear();
+  // m_selectRule_stdv.clear();
 }

@@ -8,7 +8,6 @@
 #ifndef CSVREADER_H_
 #define CSVREADER_H_
 
-#include <algorithm>
 #include <boost/algorithm/string.hpp>
 #include <fstream>
 #include <iterator>
@@ -35,8 +34,14 @@ public:
   QString m_fileName_str;
   QString m_delimeter_str;
 
+  void readData();
   // Function to fetch data from a CSV File
-  std::vector<std::vector<string>> getData();
+  std::vector<std::string> getHeaderOfDatabse() const;
+  std::vector<std::vector<long int>> getDataBase() const;
+
+private:
+  std::vector<std::vector<long int>> m_dataList_v;
+  std::vector<std::string> m_dataBaseHeader_v;
 };
 
 #endif /* CSVREADER_H_ */
