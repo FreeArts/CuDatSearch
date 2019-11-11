@@ -114,12 +114,28 @@ void MainWindow::vectorConvert(const QVector<QString> &f_selectRule_v,
 }
 
 void MainWindow::on_runQueryButton_clicked() {
+  // Example query
+  // SELECT name,brand where date=2010 & sex=1 | brand=3
+
+  // Serial method:
   prepareQuery();
   vectorConvert(m_selectRule_v, m_selectTargets_v);
 
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
-  m_SelectProcess.showDatabase();
+
+  vector<vector<long int>> l_serialResultValue_v =
+      m_SelectProcess.getQueryResult();
+
+  //---------------------------
+  vector<vector<long int>> l_parallelResultValue_v =
+      m_SelectProcess.parallelRun();
+
+  /*for (vector<long int> vec : teszt) {
+    for (long int vector_member : vec) {
+      qDebug() << vector_member << ";";
+    }
+  }*/
 
   // m_selectRule_stdv.clear();
 }
