@@ -32,6 +32,10 @@ void MainWindow::on_loadDatabaseButton_clicked() {
 
   m_SelectProcess.loadDatabase(m_dataList_v, m_headerOfDataBase_v);
 
+  //----------D-R-A-W-T-A-B-L-E---------
+  ui->tableWidget->setRowCount(static_cast<int>(m_dataList_v.size()));
+  ui->tableWidget->setColumnCount(
+      static_cast<int>(m_headerOfDataBase_v.size()));
   // For Qt part test. Original showDataList is on Cuda side!
   // showDataList();
 
@@ -113,6 +117,23 @@ void MainWindow::vectorConvert(const QVector<QString> &f_selectRule_v,
   }
 }
 
+void MainWindow::drawResults(vector<vector<long int>> f_parallelResultValue_v) {
+
+  int l_row_i = 0;
+  int l_column_i = 0;
+
+  for (vector<long int> currentLine : f_parallelResultValue_v) {
+    l_column_i = 0;
+    for (long int currentCell : currentLine) {
+      ui->tableWidget->setItem(
+          l_row_i, l_column_i,
+          new QTableWidgetItem(QString::number(currentCell)));
+      l_column_i++;
+    }
+    l_row_i++;
+  }
+}
+
 void MainWindow::on_runQueryButton_clicked() {
   // Example query
   // SELECT name,brand where date=2010 & sex=1 | brand=3
@@ -130,12 +151,7 @@ void MainWindow::on_runQueryButton_clicked() {
   //---------------------------
   vector<vector<long int>> l_parallelResultValue_v =
       m_SelectProcess.parallelRun();
-
-  /*for (vector<long int> vec : teszt) {
-    for (long int vector_member : vec) {
-      qDebug() << vector_member << ";";
-    }
-  }*/
-
+  //---------------------------
+  drawResults(l_parallelResultValue_v);
   // m_selectRule_stdv.clear();
 }

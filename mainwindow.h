@@ -52,6 +52,8 @@ private:
   void prepareQuery();
   void vectorConvert(const QVector<QString> &f_selectRule_v,
                      const QVector<QString> &f_selectTargets_v);
+
+  void drawResults(vector<vector<long>> f_parallelResultValue_v);
 };
 
 #endif // MAINWINDOW_H
