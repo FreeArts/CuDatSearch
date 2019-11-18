@@ -189,6 +189,11 @@ void TestCuDatBase::testSelectSimple() {
   l_serialResultValue_v.clear();
   l_parallelResultValue_v.clear();
 
+  //--Test--Software--Version--
+  QString l_softwareVersion =
+      QString::fromUtf8(m_SelectProcess.m_versionNumber_str.c_str());
+
+  QVERIFY(l_softwareVersion == "v1.0 alpha");
   //---I-N-I-T-T-E-S-T----
   m_testSituation_e = testCases::simpleTest;
   loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");

@@ -138,19 +138,23 @@ void MainWindow::on_runQueryButton_clicked() {
   // Example query
   // SELECT name,brand where date=2010 & sex=1 | brand=3
 
-  // Serial method:
+  // init
+  vector<vector<long int>> l_serialResultValue_v;
+  vector<vector<long int>> l_parallelResultValue_v;
+  l_serialResultValue_v.clear();
+  l_parallelResultValue_v.clear();
+
   prepareQuery();
   vectorConvert(m_selectRule_v, m_selectTargets_v);
 
+  // Serial method:
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
 
-  vector<vector<long int>> l_serialResultValue_v =
-      m_SelectProcess.getQueryResult();
+  l_serialResultValue_v = m_SelectProcess.getQueryResult();
 
   //---------------------------
-  vector<vector<long int>> l_parallelResultValue_v =
-      m_SelectProcess.parallelRun();
+  l_parallelResultValue_v = m_SelectProcess.parallelRun();
   //---------------------------
   drawResults(l_parallelResultValue_v);
   // m_selectRule_stdv.clear();
