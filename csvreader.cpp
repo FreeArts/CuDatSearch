@@ -36,13 +36,18 @@ void CSVReader::readData() {
 
   m_dataBaseHeader_v = l_dataList_v.at(whereTheDataBaseHeader);
 
+  long int l_tmpVectorValue_li;
   for (unsigned int l_itx_i = whereTheDataStart; l_itx_i < l_dataList_v.size();
        l_itx_i++) {
     for (unsigned int l_ity_i = 0; l_ity_i < l_dataList_v.at(l_itx_i).size();
          l_ity_i++) {
-      long int l_tmpVectorValue_li =
-          std::stol(l_dataList_v.at(l_itx_i).at(l_ity_i));
-      l_tmpVector_v.push_back(l_tmpVectorValue_li);
+      try {
+        l_tmpVectorValue_li = std::stol(l_dataList_v.at(l_itx_i).at(l_ity_i));
+        l_tmpVector_v.push_back(l_tmpVectorValue_li);
+      } catch (const std::invalid_argument) {
+        l_tmpVectorValue_li = -1;
+        l_tmpVector_v.push_back(l_tmpVectorValue_li);
+      }
     }
     m_dataList_v.push_back(l_tmpVector_v);
     l_tmpVector_v.clear();

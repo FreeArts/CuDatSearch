@@ -193,10 +193,11 @@ void TestCuDatBase::testSelectSimple() {
   QString l_softwareVersion =
       QString::fromUtf8(m_SelectProcess.m_versionNumber_str.c_str());
 
-  QVERIFY(l_softwareVersion == "v1.0 alpha");
+  QVERIFY(l_softwareVersion == "v2.0 alpha");
   //---I-N-I-T-T-E-S-T----
   m_testSituation_e = testCases::simpleTest;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -214,7 +215,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase2;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -227,7 +229,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase3;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -240,7 +243,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase4;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -253,7 +257,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase5;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -266,7 +271,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase6;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
@@ -279,7 +285,8 @@ void TestCuDatBase::testSelectSimple() {
   //------------------------------------------------
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase7;
-  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv");
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
   simSelectRule(m_testSituation_e);
   m_SelectProcess.readSelectRule(m_selectRule_stdv);
   m_SelectProcess.run();
