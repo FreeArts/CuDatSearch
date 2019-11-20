@@ -1,0 +1,2 @@
+export LD_LIBRARY_PATH=/home/freeart/MscThesis/CuDatBase/cudatbase/src/
+./CuDatConsole "/home/freeart/MscThesis/CuDatBase/cudatbase/src/simple_test.csv" ";" "SELECT name,brand where date="2010" & sex="men" | brand="ktm""
