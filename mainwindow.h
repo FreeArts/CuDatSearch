@@ -9,6 +9,7 @@
 #include <QDebug>
 #include <QFileDialog>
 #include <QMainWindow>
+#include <QString>
 
 namespace Ui {
 

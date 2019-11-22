@@ -5,6 +5,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
   ui->setupUi(this);
   m_delimeter_str = ";";
+
+  ui->SWversion->setText(
+      QString::fromUtf8(m_SelectProcess.getSWversion().c_str()));
 }
 
 MainWindow::~MainWindow() { delete ui; }
@@ -63,6 +66,12 @@ void MainWindow::characterAlignment(QString &f_targetString) {
 
   f_targetString.replace(" =", "=");
   f_targetString.replace("= ", "=");
+
+  f_targetString.replace(" <", "<");
+  f_targetString.replace("< ", "<");
+
+  f_targetString.replace(" >", ">");
+  f_targetString.replace("> ", ">");
 
   f_targetString.replace(" ,", ",");
   f_targetString.replace(", ", ",");
@@ -137,6 +146,7 @@ void MainWindow::drawResults(vector<vector<long int>> f_parallelResultValue_v) {
 void MainWindow::on_runQueryButton_clicked() {
   // Example query
   // SELECT name,brand where date=2010 & sex=1 | brand=3
+  // SELECT name,brand where date>2009 & sex<2
 
   // init
   vector<vector<long int>> l_serialResultValue_v;
@@ -157,5 +167,5 @@ void MainWindow::on_runQueryButton_clicked() {
   l_parallelResultValue_v = m_SelectProcess.parallelRun();
   //---------------------------
   drawResults(l_parallelResultValue_v);
-  // m_selectRule_stdv.clear();
+  m_selectRule_stdv.clear();
 }

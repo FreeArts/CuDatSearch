@@ -2,6 +2,7 @@
 
 enum class TestCuDatBase::testCases {
   simpleTest,
+  simpleTest2,
   testCase2,
   testCase3,
   testCase4,
@@ -43,6 +44,24 @@ void TestCuDatBase::simSelectRule(testCases f_testSitutation_e) {
     m_selectRule_stdv.push_back("sex=1");
     m_selectRule_stdv.push_back("|");
     m_selectRule_stdv.push_back("brand=3");
+
+    l_goodLine_v.clear();
+
+    l_goodLine_v.push_back(2010);
+    l_goodLine_v.push_back(1);
+    l_goodLine_v.push_back(3);
+    l_goodLine_v.push_back(13);
+
+    m_goodResult_v.push_back(l_goodLine_v);
+    m_goodResultNumber_ui = 1;
+
+    break;
+  }
+
+  case testCases::simpleTest2: {
+    m_selectRule_stdv.push_back("date>2009");
+    m_selectRule_stdv.push_back("&");
+    m_selectRule_stdv.push_back("sex<2");
 
     l_goodLine_v.clear();
 
@@ -191,11 +210,30 @@ void TestCuDatBase::testSelectSimple() {
 
   //--Test--Software--Version--
   QString l_softwareVersion =
-      QString::fromUtf8(m_SelectProcess.m_versionNumber_str.c_str());
+      QString::fromUtf8(m_SelectProcess.getSWversion().c_str());
 
-  QVERIFY(l_softwareVersion == "v2.0 alpha");
+  QVERIFY(l_softwareVersion == "v0.3 alpha");
   //---I-N-I-T-T-E-S-T----
   m_testSituation_e = testCases::simpleTest;
+  loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
+          "simple_test.csv");
+  simSelectRule(m_testSituation_e);
+  m_SelectProcess.readSelectRule(m_selectRule_stdv);
+  m_SelectProcess.run();
+
+  //------------S-E-R-I-A-L------------
+  l_serialResultValue_v = m_SelectProcess.getQueryResult();
+  //------------P-A-R-A-L-L-E-L--------
+  l_parallelResultValue_v = m_SelectProcess.parallelRun();
+  //---------------T-E-S-T-R-E-S-U-L-T--------------
+  QCOMPARE(m_goodResultNumber_ui + 1,
+           checkGoodResultNumbers(l_serialResultValue_v));
+  QCOMPARE(m_goodResultNumber_ui,
+           checkGoodResultNumbers(l_parallelResultValue_v));
+  //------------------------------------------------
+
+  //---I-N-I-T-T-E-S-T----
+  m_testSituation_e = testCases::simpleTest2;
   loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
           "simple_test.csv");
   simSelectRule(m_testSituation_e);
@@ -208,11 +246,12 @@ void TestCuDatBase::testSelectSimple() {
   //------------P-A-R-A-L-L-E-L--------
   l_parallelResultValue_v = m_SelectProcess.parallelRun();
   //---------------T-E-S-T-R-E-S-U-L-T--------------
-  QCOMPARE(m_goodResultNumber_ui + 1,
+  QCOMPARE(m_goodResultNumber_ui,
            checkGoodResultNumbers(l_serialResultValue_v));
   QCOMPARE(m_goodResultNumber_ui,
            checkGoodResultNumbers(l_parallelResultValue_v));
   //------------------------------------------------
+
   //---I-N-I-T-T-E-S-T-----N-E-W----T-E-S-T----
   m_testSituation_e = testCases::testCase2;
   loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"
