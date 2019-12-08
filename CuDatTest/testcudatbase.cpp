@@ -212,7 +212,7 @@ void TestCuDatBase::testSelectSimple() {
   QString l_softwareVersion =
       QString::fromUtf8(m_SelectProcess.getSWversion().c_str());
 
-  QVERIFY(l_softwareVersion == "v0.3 alpha");
+  QVERIFY(l_softwareVersion == "v0.1 beta");
   //---I-N-I-T-T-E-S-T----
   m_testSituation_e = testCases::simpleTest;
   loadCSV("/home/freeart/MscThesis/CuDatBase/cudatbase/src/CSV_dir/"

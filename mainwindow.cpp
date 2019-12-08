@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QElapsedTimer>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
@@ -147,6 +148,7 @@ void MainWindow::on_runQueryButton_clicked() {
   // Example query
   // SELECT name,brand where date=2010 & sex=1 | brand=3
   // SELECT name,brand where date>2009 & sex<2
+  // Select * where MJ03="10000013" & JAAC002="76"
 
   // init
   vector<vector<long int>> l_serialResultValue_v;
@@ -163,9 +165,20 @@ void MainWindow::on_runQueryButton_clicked() {
 
   l_serialResultValue_v = m_SelectProcess.getQueryResult();
 
-  //---------------------------
+  //----------P-A-R-A-L-L-E-L---------
+  QElapsedTimer timer;
+  timer.start();
   l_parallelResultValue_v = m_SelectProcess.parallelRun();
-  //---------------------------
+  qDebug() << "Full quers time" << timer.elapsed() << "milliseconds";
+  //---------------------------------
+  float l_parallelRuntimeResult = m_SelectProcess.getParallelRuntimeValue();
+  float l_parallelSearchtimeResult =
+      m_SelectProcess.getParallelSearchtimeValue();
+
+  ui->runTimeResult->setText(QString::number(double(l_parallelRuntimeResult)));
+  ui->searchResult->setText(
+      QString::number(double(l_parallelSearchtimeResult)));
+
   drawResults(l_parallelResultValue_v);
   m_selectRule_stdv.clear();
 }
